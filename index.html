@@ -3,51 +3,315 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cedar Park Games - Indie game studio creating fun games for Android" />
   <title>Cedar Park Games</title>
   <style>
+    :root {
+      --bg-primary: #0f0f1a;
+      --bg-secondary: #1a1a2e;
+      --bg-card: #252542;
+      --text-primary: #f0f0f5;
+      --text-secondary: #a0a0b8;
+      --accent: #00d4aa;
+      --accent-hover: #00f5c4;
+      --bluesky: #0085ff;
+      --bluesky-hover: #00a3ff;
+      --spacing: 24px;
+      --radius: 12px;
+      --max-width: 800px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      font-family: system-ui, sans-serif;
-      background: #fafafa;
-      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--accent-hover);
+    }
+
+    a:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 8px 16px;
+      z-index: 100;
+      font-weight: 600;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--spacing);
+    }
+
+    .banner {
+      background: var(--bg-secondary);
+      padding: var(--spacing) 0;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .banner-text {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+    }
+
+    .logo-section {
+      text-align: center;
+      padding: calc(var(--spacing) * 2) 0;
+    }
+
+    .logo-link {
+      display: inline-block;
+    }
+
+    .logo-link:hover {
+      opacity: 0.9;
+    }
+
+    .logo-link:focus {
+      outline: none;
+    }
+
+    .logo {
+      width: 280px;
+      max-width: 80vw;
+      height: auto;
+      display: block;
+      margin: 0 auto var(--spacing);
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    main {
+      padding: var(--spacing) 0 calc(var(--spacing) * 4);
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      margin: 0 0 var(--spacing);
+      color: var(--text-primary);
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing);
+    }
+
+    .game-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: calc(var(--spacing) * 1.5);
+      border: 1px solid rgba(255,255,255,0.05);
+      text-align: left;
+    }
+
+    .game-header {
       display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: space-between;
+      gap: var(--spacing);
+      flex-wrap: wrap;
+      margin-bottom: var(--spacing);
+    }
+
+    .game-title {
+      font-size: 1.5rem;
+      margin: 0;
+      color: var(--text-primary);
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg-primary);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .game-tagline {
+      font-size: 1.125rem;
+      color: var(--accent);
+      margin: 0 0 12px;
+      font-weight: 500;
+    }
+
+    .game-description {
+      color: var(--text-secondary);
+      margin: 0 0 var(--spacing);
+      font-size: 0.95rem;
+    }
+
+    .game-platform {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .platform-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .social-section {
+      margin-top: calc(var(--spacing) * 3);
+      padding-top: calc(var(--spacing) * 2);
+      border-top: 1px solid rgba(255,255,255,0.05);
       text-align: center;
     }
 
-    header {
-      width: 100%;
-      background: #222;
-      color: white;
-      padding: 24px 0;
-      font-size: 2rem;
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing);
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: transparent;
+      border: 2px solid var(--bluesky);
+      color: var(--bluesky);
+      padding: 12px 24px;
+      border-radius: var(--radius);
       font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .subtext {
-      margin-top: 12px;
       font-size: 1rem;
-      color: #555;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
 
-    img {
-      margin-top: 40px;
-      max-width: 90%;
-      height: auto;
+    .social-btn:hover {
+      background: var(--bluesky);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 133, 255, 0.4);
+    }
+
+    .social-btn:focus {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .social-btn img {
+      width: 22px;
+      height: 22px;
+    }
+
+    footer {
+      text-align: center;
+      padding: calc(var(--spacing) * 2) 0;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    @media (min-width: 600px) {
+      .logo {
+        width: 360px;
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header>cedarparkgames.com</header>
+  <header class="banner">
+    <div class="container">
+      <h1 class="banner-text">cedarparkgames.com</h1>
+    </div>
+  </header>
 
-  <div class="subtext">Coming soon...</div>
+  <div class="container">
+    <section class="logo-section">
+        <img src="assets/logo-dark.png" alt="Cedar Park Games" class="logo" />
+      <p class="tagline">Indie games for everyone</p>
+    </section>
 
-  <img src="assets/logo.png" alt="Cedar Park Games Logo" />
+    <main id="main-content">
+      <section>
+        <h2>Our Games</h2>
+        <div class="games-grid">
+          <article class="game-card">
+            <div class="game-header">
+              <h3 class="game-title">WordDillo</h3>
+              <span class="badge">Coming Soon</span>
+            </div>
+            <p class="game-tagline">A fun word guessing game</p>
+            <p class="game-description">
+              Guess letters to reveal hidden words. Earn points for correct guesses. Use wild cards to reveal letters instantly. Three rounds of increasing difficulty!
+            </p>
+            <div class="game-platform">
+              <svg class="platform-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.523 3.048a1.19 1.19 0 011.58.268l2.155 3.555c.218.36.118.833-.243 1.15a1.185 1.185 0 01-1.523-.268l-2.155-3.555a1.19 1.19 0 01.186-1.15zm-6.993.268a1.19 1.19 0 00-1.58.268l-2.155 3.555a1.185 1.185 0 00.243 1.523c.36.218.833.118 1.15-.243l2.155-3.555a1.19 1.19 0 00-1.813-1.548zm3.477 7.406l-1.59-3.13-.002.001.002-.002-3.15-6.185a1.19 1.19 0 00-1.53-.266 1.185 1.185 0 00-.266 1.53l3.15 6.185 1.59 3.13.002-.001-.002.002 6.15 3.185c.36.218.833.118 1.15-.243.218-.36.118-.833-.244-1.15l-4.812-2.138z"/>
+              </svg>
+              <span>Coming soon to Android</span>
+            </div>
+          </article>
+        </div>
+      </section>
 
+      <section class="social-section">
+        <h2>Follow Us</h2>
+        <div class="social-links">
+          <a href="https://bsky.app/profile/cedarparkgames.bsky.social" class="social-btn" target="_blank" rel="noopener noreferrer">
+            <img src="assets/bluesky-icon.png" alt="Bluesky" />
+            Bluesky
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Cedar Park Games. All rights reserved.</p>
+    </footer>
+  </div>
 </body>
 </html>
-
